@@ -25,6 +25,11 @@ local userManagement_Model
 
 -- ************************ UI Events Start ********************************
 
+Script.serveEvent('CSK_UserManagement.OnNewStatusModuleVersion', 'UserManagement_OnNewStatusModuleVersion')
+Script.serveEvent('CSK_UserManagement.OnNewStatusCSKStyle', 'UserManagement_OnNewStatusCSKStyle')
+Script.serveEvent('CSK_UserManagement.OnNewStatusModuleIsActive', 'UserManagement_OnNewStatusModuleIsActive')
+
+Script.serveEvent('CSK_UserManagement.OnNewStatusUsernameToCreate', 'UserManagement_OnNewStatusUsernameToCreate')
 Script.serveEvent("CSK_UserManagement.OnNewUserToLogIn", "UserManagement_OnNewUserToLogIn")
 Script.serveEvent("CSK_UserManagement.OnNewLogInPassword", "UserManagement_OnNewLogInPassword")
 Script.serveEvent("CSK_UserManagement.OnNewLoggedInUser", "UserManagement_OnNewLoggedInUser")
@@ -77,6 +82,10 @@ local function handleOnExpiredTmrUserManagement()
     Script.notifyEvent("UserManagement_OnNewHideWrongPassword", true)
   end
 
+  Script.notifyEvent("UserManagement_OnNewStatusModuleVersion", 'v' .. userManagement_Model.version)
+  Script.notifyEvent("UserManagement_OnNewStatusCSKStyle", userManagement_Model.styleForUI)
+  Script.notifyEvent("UserManagement_OnNewStatusModuleIsActive", true)
+
   userManagement_Model.loginPassword = ''
   userManagement_Model.selectedUserToUpdate = nil
   userManagement_Model.newUsernameToAdd = ''
@@ -93,11 +102,12 @@ local function handleOnExpiredTmrUserManagement()
       Script.notifyEvent("UserManagement_OnUserLevelMaintenanceActive", true)
       Script.notifyEvent("UserManagement_OnUserLevelOperatorActive", true)
 
+      Script.notifyEvent("UserManagement_OnNewStatusUsernameToCreate", '')
       Script.notifyEvent("UserManagement_OnNewUserToUpdate", 'none')
       Script.notifyEvent("UserManagement_OnNewPasswordToUpdate", '')
       Script.notifyEvent("UserManagement_OnNewUserLevelToUpdate", 'Operator')
 
-      Script.notifyEvent("UserManagement_OnNewUserTableList", userManagement_Model.helperFuncs.createJsonList(userManagement_Model.parameters.users))
+      Script.notifyEvent("UserManagement_OnNewUserTableList", userManagement_Model.helperFuncs.createUserJsonList(userManagement_Model.parameters.users, userManagement_Model.selectedUserToUpdate))
 
     elseif userManagement_Model.parameters.userLevel[userManagement_Model.activeUser] == 'Service' then
       Script.notifyEvent("UserManagement_OnUserLevelAdminActive", false)
@@ -145,13 +155,13 @@ end
 Script.serveFunction("CSK_UserManagement.pageCalled", pageCalled)
 
 local function setLoginUser(user)
-  _G.logger:info(nameOfModule .. ": Set login user = " .. tostring(user))
+  _G.logger:fine(nameOfModule .. ": Set login user = " .. tostring(user))
   userManagement_Model.selectedUser = user
 end
 Script.serveFunction("CSK_UserManagement.setLoginUser", setLoginUser)
 
 local function setLoginPassword(password)
-  _G.logger:info(nameOfModule .. ": Set password.")
+  _G.logger:fine(nameOfModule .. ": Set password.")
   userManagement_Model.loginPassword = Cipher.AES.encrypt(password, userManagement_Model.key)
 end
 Script.serveFunction("CSK_UserManagement.setLoginPassword", setLoginPassword)
@@ -163,7 +173,7 @@ local function login()
   else
     Script.notifyEvent("UserManagement_OnNewHideWrongPassword", false)
     tmrQuitMessage:start()
-    _G.logger:info(nameOfModule .. ": Wrong password for user = " .. userManagement_Model.selectedUser)
+    _G.logger:warning(nameOfModule .. ": Wrong password for user = " .. userManagement_Model.selectedUser)
     Script.sleep(10)
   end
   handleOnExpiredTmrUserManagement()
@@ -187,7 +197,7 @@ local function selectUserToUpdate(user)
   for i=1, #userManagement_Model.parameters.users do
     if userManagement_Model.parameters.users[i] == userManagement_Model.newUsernameToAdd then
       userManagement_Model.selectedUserToUpdate = user
-      _G.logger:info(nameOfModule .. ": User ".. user .. " selected to update.")
+      _G.logger:fine(nameOfModule .. ": User ".. user .. " selected to update.")
       userExists = true
     end
   end
@@ -217,18 +227,20 @@ local function selectedUserViaTable(selection)
       userManagement_Model.selectedUserToUpdate = string.sub(selection, pos+1, endPos-1)
     end
   end
-  _G.logger:info(nameOfModule .. ": Selected User = " .. userManagement_Model.selectedUserToUpdate)
+  _G.logger:fine(nameOfModule .. ": Selected User = " .. userManagement_Model.selectedUserToUpdate)
 
   Script.notifyEvent("UserManagement_OnNewUserToUpdate", userManagement_Model.selectedUserToUpdate)
   Script.notifyEvent("UserManagement_OnNewUserLevelToUpdate", userManagement_Model.parameters.userLevel[userManagement_Model.selectedUserToUpdate])
   userManagement_Model.newPassword = ''
   Script.notifyEvent("UserManagement_OnNewPasswordToUpdate", '')
 
+  Script.notifyEvent("UserManagement_OnNewUserTableList", userManagement_Model.helperFuncs.createUserJsonList(userManagement_Model.parameters.users, userManagement_Model.selectedUserToUpdate))
+
 end
 Script.serveFunction("CSK_UserManagement.selectedUserViaTable", selectedUserViaTable)
 
 local function setNewUsername(name)
-  _G.logger:info(nameOfModule .. ": Set new username: " .. tostring(name))
+  _G.logger:fine(nameOfModule .. ": Set new username: " .. tostring(name))
   userManagement_Model.newUsernameToAdd = name
 end
 Script.serveFunction("CSK_UserManagement.setNewUsername", setNewUsername)
@@ -242,7 +254,7 @@ local function addUser()
       return
     end
   end
-  if not userExists then
+  if not userExists and userManagement_Model.newUsernameToAdd ~= '' then
     _G.logger:info(nameOfModule .. ": Add new user: " .. userManagement_Model.newUsernameToAdd)
     table.insert(userManagement_Model.parameters.users, userManagement_Model.newUsernameToAdd)
     userManagement_Model.parameters.passwords[userManagement_Model.newUsernameToAdd] = Cipher.AES.encrypt('', userManagement_Model.key)
@@ -276,7 +288,7 @@ Script.serveFunction("CSK_UserManagement.removeUser", removeUser)
 local function setNewPassword(password)
   local newPassword = Cipher.AES.encrypt(password, userManagement_Model.key)
   userManagement_Model.parameters.passwords[userManagement_Model.selectedUserToUpdate] = newPassword
-  _G.logger:info(nameOfModule .. ": Set new password for user: " .. userManagement_Model.selectedUserToUpdate)
+  _G.logger:fine(nameOfModule .. ": Set new password for user: " .. userManagement_Model.selectedUserToUpdate)
   Script.notifyEvent("UserManagement_OnNewHidePasswordInfo", false)
   tmrQuitMessage:start()
 end
@@ -285,12 +297,22 @@ Script.serveFunction("CSK_UserManagement.setNewPassword", setNewPassword)
 local function setNewUserLevel(level)
   if userManagement_Model.selectedUserToUpdate ~= 'admin' then
     userManagement_Model.parameters.userLevel[userManagement_Model.selectedUserToUpdate] = level
-    _G.logger:info(nameOfModule .. ": Set new userLevel for user: " .. userManagement_Model.selectedUserToUpdate .. " to " .. level)
+    _G.logger:fine(nameOfModule .. ": Set new userLevel for user: " .. userManagement_Model.selectedUserToUpdate .. " to " .. level)
   else
     Script.notifyEvent("UserManagement_OnNewUserLevelToUpdate", 'Admin')
   end
 end
 Script.serveFunction("CSK_UserManagement.setNewUserLevel", setNewUserLevel)
+
+local function getStatusModuleActive()
+  return true
+end
+Script.serveFunction('CSK_UserManagement.getStatusModuleActive', getStatusModuleActive)
+
+local function getParameters()
+  return userManagement_Model.helperFuncs.json.encode(userManagement_Model.parameters)
+end
+Script.serveFunction('CSK_UserManagement.getParameters', getParameters)
 
 -- *****************************************************************
 -- Following function can be adapted for CSK_PersistentData module usage
@@ -298,16 +320,18 @@ Script.serveFunction("CSK_UserManagement.setNewUserLevel", setNewUserLevel)
 
 local function setParameterName(name)
   userManagement_Model.parametersName = name
-  _G.logger:info(nameOfModule .. ": Set new parameter name: " .. tostring(name))
+  _G.logger:fine(nameOfModule .. ": Set new parameter name: " .. tostring(name))
 end
 Script.serveFunction("CSK_UserManagement.setParameterName", setParameterName)
 
-local function sendParameters()
+local function sendParameters(noDataSave)
   if userManagement_Model.persistentModuleAvailable then
     CSK_PersistentData.addParameter(userManagement_Model.helperFuncs.convertTable2Container(userManagement_Model.parameters), userManagement_Model.parametersName)
     CSK_PersistentData.setModuleParameterName(nameOfModule, userManagement_Model.parametersName, userManagement_Model.parameterLoadOnReboot)
-    _G.logger:info(nameOfModule .. ": Send UserManagement parameters with name '" .. userManagement_Model.parametersName .. "' to CSK_PersistentData module.")
-    CSK_PersistentData.saveData()
+    _G.logger:fine(nameOfModule .. ": Send UserManagement parameters with name '" .. userManagement_Model.parametersName .. "' to CSK_PersistentData module.")
+    if not noDataSave then
+      CSK_PersistentData.saveData()
+    end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
   end
@@ -321,25 +345,29 @@ local function loadParameters()
       _G.logger:info(nameOfModule .. ": Loaded parameters from CSK_PersistentData module.")
       userManagement_Model.parameters = userManagement_Model.helperFuncs.convertContainer2Table(data)
       CSK_UserManagement.pageCalled()
+      return true
     else
       _G.logger:warning(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
+      return false
     end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
+    return false
   end
 end
 Script.serveFunction("CSK_UserManagement.loadParameters", loadParameters)
 
 local function setLoadOnReboot(status)
   userManagement_Model.parameterLoadOnReboot = status
-  _G.logger:info(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
+  _G.logger:fine(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
+  Script.notifyEvent("UserManagement_OnNewStatusLoadParameterOnReboot", status)
 end
 Script.serveFunction("CSK_UserManagement.setLoadOnReboot", setLoadOnReboot)
 
 --- Function to react on initial load of persistent parameters
 local function handleOnInitialDataLoaded()
 
-  _G.logger:info(nameOfModule .. ': Try to initially load parameter from CSK_PersistentData module.')
+  _G.logger:fine(nameOfModule .. ': Try to initially load parameter from CSK_PersistentData module.')
   if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
 
     _G.logger:warning(nameOfModule .. ': CSK_PersistentData module is too old and will not work. Please update CSK_PersistentData module.')

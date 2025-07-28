@@ -29,6 +29,8 @@ setUserManagement_ModelHandle(userManagement_Model)
 userManagement_Model.helperFuncs = require('Configuration/UserManagement/helper/funcs')
 
 -- Create parameters / instances for this module
+userManagement_Model.styleForUI = 'None' -- Optional parameter to set UI style
+userManagement_Model.version = Engine.getCurrentAppVersion() -- Version of module
 userManagement_Model.key = '1234567890123456' -- key to encrypt passwords, should be adapted!
 userManagement_Model.selectedUser = nil -- selected user to login
 userManagement_Model.loginPassword = nil -- latest password to loging
@@ -54,6 +56,13 @@ userManagement_Model.parameters.userLevel['Admin'] = 'Admin'
 --**************************************************************************
 --**********************Start Function Scope *******************************
 --**************************************************************************
+
+--- Function to react on UI style change
+local function handleOnStyleChanged(theme)
+  userManagement_Model.styleForUI = theme
+  Script.notifyEvent("UserManagement_OnNewStatusCSKStyle", userManagement_Model.styleForUI)
+end
+Script.register('CSK_PersistentData.OnNewStatusCSKStyle', handleOnStyleChanged)
 
 
 --*************************************************************************
