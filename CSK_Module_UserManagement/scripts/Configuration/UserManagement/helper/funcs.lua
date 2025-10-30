@@ -17,6 +17,30 @@ funcs.json = require('Configuration/UserManagement/helper/Json')
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
+--- Function to get content list of users as JSON string
+---@param data string[] Table with data entries
+---@param selectedRow int Currently selected row
+---@return string sortedTable Sorted entries as JSON string
+local function createUserJsonList(data, selectedRow)
+  local sortedTable = {}
+  for key, value in pairs(data) do
+    table.insert(sortedTable, value)
+  end
+  table.sort(sortedTable)
+
+  local endList = {}
+
+  for key, value in pairs(sortedTable) do
+    local isSelected = false
+      if value == selectedRow then
+        isSelected = true
+      end
+      table.insert(endList, {User = tostring(value), selected = isSelected})
+  end
+  return funcs.json.encode(endList)
+end
+funcs.createUserJsonList = createUserJsonList
+
 --- Function to create a list with numbers
 ---@param size number Size of the list
 ---@return string list List of numbers
@@ -122,8 +146,8 @@ local function createJsonList(data)
   end
   table.sort(sortedTable)
   for _, value in ipairs(sortedTable) do
-      table.insert(resultTable, {User = value})
-    end
+    table.insert(resultTable, {User = value})
+  end
   return funcs.json.encode(resultTable)
 end
 funcs.createJsonList = createJsonList

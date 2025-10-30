@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="author" content="SICK AG">
-<title>Documentation - CSK_Module_UserManagement 1.5.0</title>
+<title>Documentation - CSK_Module_UserManagement 1.6.0</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
@@ -615,11 +615,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation - CSK_Module_UserManagement 1.5.0</h1>
+<h1>Documentation - CSK_Module_UserManagement 1.6.0</h1>
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
-<span id="revnumber">version 1.5.0,</span>
-<span id="revdate">2023-06-19</span>
+<span id="revnumber">version 1.6.0,</span>
+<span id="revdate">2025-07-28</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -639,6 +639,8 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#_functions">Functions</a>
 <ul class="sectlevel4">
 <li><a href="#API:Function:CSK_UserManagement.addUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">addUser()</span></a></li>
+<li><a href="#API:Function:CSK_UserManagement.getParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">getParameters()</span></a></li>
+<li><a href="#API:Function:CSK_UserManagement.getStatusModuleActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">getStatusModuleActive()</span></a></li>
 <li><a href="#API:Function:CSK_UserManagement.loadParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">loadParameters()</span></a></li>
 <li><a href="#API:Function:CSK_UserManagement.login"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">login()</span></a></li>
 <li><a href="#API:Function:CSK_UserManagement.logout"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">logout()</span></a></li>
@@ -665,7 +667,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Event:CSK_UserManagement.OnNewLogInPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewLogInPassword</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewParameterName"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewParameterName</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewPasswordToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewPasswordToUpdate</span></a></li>
+<li><a href="#API:Event:CSK_UserManagement.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusCSKStyle</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></a></li>
+<li><a href="#API:Event:CSK_UserManagement.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusModuleIsActive</span></a></li>
+<li><a href="#API:Event:CSK_UserManagement.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusModuleVersion</span></a></li>
+<li><a href="#API:Event:CSK_UserManagement.OnNewStatusUsernameToCreate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusUsernameToCreate</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewUserLevelToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserLevelToUpdate</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewUserList"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserList</span></a></li>
 <li><a href="#API:Event:CSK_UserManagement.OnNewUserTableList"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserTableList</span></a></li>
@@ -706,11 +712,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Version</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.5.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.6.0</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2023-06-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2025-07-28</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -772,6 +778,12 @@ Default password for user "Admin" is "admin".<br>
 <ul>
 <li>
 <p><a href="#API:Function:CSK_UserManagement.addUser">addUser()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_UserManagement.getParameters">getParameters()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_UserManagement.getStatusModuleActive">getStatusModuleActive()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_UserManagement.loadParameters">loadParameters()</a></p>
@@ -840,7 +852,19 @@ Default password for user "Admin" is "admin".<br>
 <p><a href="#API:Event:CSK_UserManagement.OnNewPasswordToUpdate">OnNewPasswordToUpdate</a></p>
 </li>
 <li>
+<p><a href="#API:Event:CSK_UserManagement.OnNewStatusCSKStyle">OnNewStatusCSKStyle</a></p>
+</li>
+<li>
 <p><a href="#API:Event:CSK_UserManagement.OnNewStatusLoadParameterOnReboot">OnNewStatusLoadParameterOnReboot</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_UserManagement.OnNewStatusModuleIsActive">OnNewStatusModuleIsActive</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_UserManagement.OnNewStatusModuleVersion">OnNewStatusModuleVersion</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_UserManagement.OnNewStatusUsernameToCreate">OnNewStatusUsernameToCreate</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_UserManagement.OnNewUserLevelToUpdate">OnNewUserLevelToUpdate</a></p>
@@ -895,62 +919,11 @@ Default password for user "Admin" is "admin".<br>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.loadParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">loadParameters()</span></h5>
+<h5 id="API:Function:CSK_UserManagement.getParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">getParameters()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_4">Short description</h6>
 <div class="paragraph">
-<p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.loadParameters()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.login"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">login()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_5">Short description</h6>
-<div class="paragraph">
-<p>Login in as user with preset username+password (see "setLoginUser"/"setLoginPassword").</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.login()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.logout"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">logout()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_6">Short description</h6>
-<div class="paragraph">
-<p>Logout of current user.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.logout()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.pageCalled"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">pageCalled()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_7">Short description</h6>
-<div class="paragraph">
-<p>Function to register "OnResume" of the module UI (only as helper function).</p>
+<p>Function to get all parameters of the client in JSON format.</p>
 </div>
 </div>
 <div class="sect5">
@@ -972,182 +945,33 @@ Default password for user "Admin" is "admin".<br>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonParameters</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string (only needed to simplify binding).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON string with all parameters.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_UserManagement.pageCalled()</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">jsonParameters = CSK_UserManagement.getParameters()</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.removeUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">removeUser()</span></h5>
+<h5 id="API:Function:CSK_UserManagement.getStatusModuleActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">getStatusModuleActive()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_8">Short description</h6>
+<h6 id="_short_description_5">Short description</h6>
 <div class="paragraph">
-<p>Remove preselected user (see "selectedUser").</p>
+<p>Function to get status if module is active.</p>
 </div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.removeUser()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.selectedUserViaTable"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">selectedUserViaTable()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_9">Short description</h6>
-<div class="paragraph">
-<p>Get selection of UI table to select user to edit.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_parameters">Parameters</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selected User in Table.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.selectedUserViaTable(selection)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.selectUserToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">selectUserToUpdate()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_10">Short description</h6>
-<div class="paragraph">
-<p>Selecte user to update.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_parameters_2">Parameters</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User to update.</p></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sect5">
 <h6 id="_return_values_2">Return values</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selected user exists.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">success = CSK_UserManagement.selectUserToUpdate(user)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.sendParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">sendParameters()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_11">Short description</h6>
-<div class="paragraph">
-<p>Send parameters to CSK_PersistentData module if possible to save them.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.sendParameters()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.setLoadOnReboot"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoadOnReboot()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_12">Short description</h6>
-<div class="paragraph">
-<p>Configure if this module should load its saved parameters at app/device boot up.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_parameters_3">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1174,20 +998,274 @@ Default password for user "Admin" is "admin".<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoadOnReboot(status)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">status = CSK_UserManagement.getStatusModuleActive()</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.setLoginPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoginPassword()</span></h5>
+<h5 id="API:Function:CSK_UserManagement.loadParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">loadParameters()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_6">Short description</h6>
+<div class="paragraph">
+<p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success to load parameters.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.loadParameters(success)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.login"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">login()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_7">Short description</h6>
+<div class="paragraph">
+<p>Login in as user with preset username+password (see "setLoginUser"/"setLoginPassword").</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.login()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.logout"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">logout()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_8">Short description</h6>
+<div class="paragraph">
+<p>Logout of current user.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.logout()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.pageCalled"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">pageCalled()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_9">Short description</h6>
+<div class="paragraph">
+<p>Function to register "OnResume" of the module UI (only as helper function).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_return_values_3">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string (only needed to simplify binding).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_UserManagement.pageCalled()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.removeUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">removeUser()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_10">Short description</h6>
+<div class="paragraph">
+<p>Remove preselected user (see "selectedUser").</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.removeUser()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.selectedUserViaTable"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">selectedUserViaTable()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_11">Short description</h6>
+<div class="paragraph">
+<p>Get selection of UI table to select user to edit.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_2">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected User in Table.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.selectedUserViaTable(selection)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.selectUserToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">selectUserToUpdate()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_12">Short description</h6>
+<div class="paragraph">
+<p>Selecte user to update.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_3">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User to update.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_4">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected user exists.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">success = CSK_UserManagement.selectUserToUpdate(user)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.sendParameters"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">sendParameters()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_13">Short description</h6>
 <div class="paragraph">
-<p>Preset password to login in via "login".</p>
+<p>Send parameters to CSK_PersistentData module if possible to save them.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1209,10 +1287,10 @@ Default password for user "Admin" is "admin".<br>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">noDataSave</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Optional] Set to TRUE if the data should NOT be saved immediately after sending.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1221,17 +1299,17 @@ Default password for user "Admin" is "admin".<br>
 <h6 id="_sample_auto_generated_11">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoginPassword(password)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.sendParameters(noDataSave)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.setLoginUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoginUser()</span></h5>
+<h5 id="API:Function:CSK_UserManagement.setLoadOnReboot"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoadOnReboot()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_14">Short description</h6>
 <div class="paragraph">
-<p>Preset user to login via "login".</p>
+<p>Configure if this module should load its saved parameters at app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1253,10 +1331,10 @@ Default password for user "Admin" is "admin".<br>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">User to login.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 </tr>
 </tbody>
 </table>
@@ -1265,17 +1343,17 @@ Default password for user "Admin" is "admin".<br>
 <h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoginUser(user)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoadOnReboot(status)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_UserManagement.setNewPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setNewPassword()</span></h5>
+<h5 id="API:Function:CSK_UserManagement.setLoginPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoginPassword()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_15">Short description</h6>
 <div class="paragraph">
-<p>Set new password for preselected user (see "selectUserToUpdate" / "selectUserViaTable").</p>
+<p>Preset password to login in via "login".</p>
 </div>
 </div>
 <div class="sect5">
@@ -1309,6 +1387,94 @@ Default password for user "Admin" is "admin".<br>
 <h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoginPassword(password)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.setLoginUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setLoginUser()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_16">Short description</h6>
+<div class="paragraph">
+<p>Preset user to login via "login".</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_7">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User to login.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setLoginUser(user)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_UserManagement.setNewPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setNewPassword()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_17">Short description</h6>
+<div class="paragraph">
+<p>Set new password for preselected user (see "selectUserToUpdate" / "selectUserViaTable").</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_8">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Password</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setNewPassword(password)</code></pre>
 </div>
 </div>
@@ -1317,13 +1483,13 @@ Default password for user "Admin" is "admin".<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_UserManagement.setNewUserLevel"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setNewUserLevel()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_16">Short description</h6>
+<h6 id="_short_description_18">Short description</h6>
 <div class="paragraph">
 <p>Set new userlevel for preselected user (see "selectUserToUpdate" / "selectUserViaTable").</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_7">Parameters</h6>
+<h6 id="_parameters_9">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1351,7 +1517,7 @@ Default password for user "Admin" is "admin".<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setNewUserLevel(level)</code></pre>
@@ -1362,13 +1528,13 @@ Default password for user "Admin" is "admin".<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_UserManagement.setNewUsername"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setNewUsername()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_17">Short description</h6>
+<h6 id="_short_description_19">Short description</h6>
 <div class="paragraph">
 <p>Preset username to add as new user via "addUser".</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_8">Parameters</h6>
+<h6 id="_parameters_10">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1395,7 +1561,7 @@ Default password for user "Admin" is "admin".<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setNewUsername(name)</code></pre>
@@ -1406,13 +1572,13 @@ Default password for user "Admin" is "admin".<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_UserManagement.setParameterName"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-function">setParameterName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_18">Short description</h6>
+<h6 id="_short_description_20">Short description</h6>
 <div class="paragraph">
 <p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_9">Parameters</h6>
+<h6 id="_parameters_11">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1439,7 +1605,7 @@ Default password for user "Admin" is "admin".<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_UserManagement.setParameterName(name)</code></pre>
@@ -1453,13 +1619,13 @@ Default password for user "Admin" is "admin".<br>
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnDataLoadedOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_19">Short description</h6>
+<h6 id="_short_description_21">Short description</h6>
 <div class="paragraph">
 <p>Event to call if module tried to load parameters and should be ready.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnDataLoadedOnReboot</span>()
@@ -1474,7 +1640,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewHidePasswordInfo"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewHidePasswordInfo</span></h5>
 <div class="sect5">
-<h6 id="_short_description_20">Short description</h6>
+<h6 id="_short_description_22">Short description</h6>
 <div class="paragraph">
 <p>Event to hide password info on UI.</p>
 </div>
@@ -1507,7 +1673,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewHidePasswordInfo</span>(status)
@@ -1522,7 +1688,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewHideWrongPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewHideWrongPassword</span></h5>
 <div class="sect5">
-<h6 id="_short_description_21">Short description</h6>
+<h6 id="_short_description_23">Short description</h6>
 <div class="paragraph">
 <p>Event to hide info of wrong password on UI.</p>
 </div>
@@ -1555,7 +1721,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewHideWrongPassword</span>(status)
@@ -1570,7 +1736,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewLoggedInUser"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewLoggedInUser</span></h5>
 <div class="sect5">
-<h6 id="_short_description_22">Short description</h6>
+<h6 id="_short_description_24">Short description</h6>
 <div class="paragraph">
 <p>Notify currently logged in user.</p>
 </div>
@@ -1603,7 +1769,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewLoggedInUser</span>(user)
@@ -1618,7 +1784,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewLogInPassword"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewLogInPassword</span></h5>
 <div class="sect5">
-<h6 id="_short_description_23">Short description</h6>
+<h6 id="_short_description_25">Short description</h6>
 <div class="paragraph">
 <p>Notify empty password with page reload.</p>
 </div>
@@ -1651,7 +1817,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewLogInPassword</span>(password)
@@ -1666,7 +1832,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewParameterName"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewParameterName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_24">Short description</h6>
+<h6 id="_short_description_26">Short description</h6>
 <div class="paragraph">
 <p>Notify name of persistent data parameter.</p>
 </div>
@@ -1699,7 +1865,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewParameterName</span>(name)
@@ -1714,7 +1880,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewPasswordToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewPasswordToUpdate</span></h5>
 <div class="sect5">
-<h6 id="_short_description_25">Short description</h6>
+<h6 id="_short_description_27">Short description</h6>
 <div class="paragraph">
 <p>Notify empty password with page reload.</p>
 </div>
@@ -1747,7 +1913,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewPasswordToUpdate</span>(password)
@@ -1760,15 +1926,63 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusCSKStyle</span></h5>
+<div class="sect5">
+<h6 id="_short_description_28">Short description</h6>
+<div class="paragraph">
+<p>Notify UI style to use for CSK modules.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_7">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">theme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UI style</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCSKStyle</span>(theme)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnNewStatusCSKStyle</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCSKStyle</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_26">Short description</h6>
+<h6 id="_short_description_29">Short description</h6>
 <div class="paragraph">
 <p>Notify status if parameters should be loaded on app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_7">Callback arguments</h6>
+<h6 id="_callback_arguments_8">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1795,7 +2009,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
@@ -1808,15 +2022,159 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusModuleIsActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_30">Short description</h6>
+<div class="paragraph">
+<p>Notify if module can be used on device.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_9">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleIsActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusModuleVersion</span></h5>
+<div class="sect5">
+<h6 id="_short_description_31">Short description</h6>
+<div class="paragraph">
+<p>Notify version of module.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_10">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleVersion</span>(version)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnNewStatusUsernameToCreate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewStatusUsernameToCreate</span></h5>
+<div class="sect5">
+<h6 id="_short_description_32">Short description</h6>
+<div class="paragraph">
+<p>Notify preset name for user to create.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_11">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusUsernameToCreate</span>(name)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnNewStatusUsernameToCreate</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusUsernameToCreate</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewUserLevelToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserLevelToUpdate</span></h5>
 <div class="sect5">
-<h6 id="_short_description_27">Short description</h6>
+<h6 id="_short_description_33">Short description</h6>
 <div class="paragraph">
 <p>Notify userlevel for selected user to update.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_8">Callback arguments</h6>
+<h6 id="_callback_arguments_12">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1843,7 +2201,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewUserLevelToUpdate</span>(userlevel)
@@ -1858,13 +2216,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewUserList"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserList</span></h5>
 <div class="sect5">
-<h6 id="_short_description_28">Short description</h6>
+<h6 id="_short_description_34">Short description</h6>
 <div class="paragraph">
 <p>Notify list of users to be selectable in UI to login.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_9">Callback arguments</h6>
+<h6 id="_callback_arguments_13">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1891,7 +2249,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewUserList</span>(userList)
@@ -1906,13 +2264,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewUserTableList"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserTableList</span></h5>
 <div class="sect5">
-<h6 id="_short_description_29">Short description</h6>
+<h6 id="_short_description_35">Short description</h6>
 <div class="paragraph">
 <p>Notify list of users to be selectable in tableview of UI if logged in as admin to select and update users.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_10">Callback arguments</h6>
+<h6 id="_callback_arguments_14">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1939,7 +2297,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewUserTableList</span>(userList)
@@ -1954,13 +2312,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewUserToLogIn"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserToLogIn</span></h5>
 <div class="sect5">
-<h6 id="_short_description_30">Short description</h6>
+<h6 id="_short_description_36">Short description</h6>
 <div class="paragraph">
 <p>Notify preselected user to login.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_11">Callback arguments</h6>
+<h6 id="_callback_arguments_15">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1987,7 +2345,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewUserToLogIn</span>(user)
@@ -2002,13 +2360,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnNewUserToUpdate"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnNewUserToUpdate</span></h5>
 <div class="sect5">
-<h6 id="_short_description_31">Short description</h6>
+<h6 id="_short_description_37">Short description</h6>
 <div class="paragraph">
 <p>Notify preselected user to update to show info in UI.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_12">Callback arguments</h6>
+<h6 id="_callback_arguments_16">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2035,7 +2393,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewUserToUpdate</span>(user)
@@ -2050,201 +2408,9 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_UserManagement.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
 <div class="sect5">
-<h6 id="_short_description_32">Short description</h6>
+<h6 id="_short_description_38">Short description</h6>
 <div class="paragraph">
 <p>Notify status if features of CSK_PersistendData module are available.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_13">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_UserManagement.OnUserLevelAdminActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_33">Short description</h6>
-<div class="paragraph">
-<p>Notify if currently logged in user has userlevel "Admin".</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_14">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_UserManagement.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_34">Short description</h6>
-<div class="paragraph">
-<p>Notify if currently logged in user has userlevel "Maintenance" or higher.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_15">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_UserManagement.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_35">Short description</h6>
-<div class="paragraph">
-<p>Notify if currently logged in user has userlevel "Operator" or higher.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_16">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_UserManagement.OnUserLevelServiceActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_36">Short description</h6>
-<div class="paragraph">
-<p>Notify if currently logged in user has userlevel "Service" or higher.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2275,7 +2441,199 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnUserLevelAdminActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_39">Short description</h6>
+<div class="paragraph">
+<p>Notify if currently logged in user has userlevel "Admin".</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_18">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_40">Short description</h6>
+<div class="paragraph">
+<p>Notify if currently logged in user has userlevel "Maintenance" or higher.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_19">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_41">Short description</h6>
+<div class="paragraph">
+<p>Notify if currently logged in user has userlevel "Operator" or higher.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_20">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_UserManagement.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_UserManagement.OnUserLevelServiceActive"><span class="breadcrumb">CSK_UserManagement.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_42">Short description</h6>
+<div class="paragraph">
+<p>Notify if currently logged in user has userlevel "Service" or higher.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_21">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelServiceActive</span>(status)
@@ -2356,8 +2714,8 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.5.0<br>
-Last updated 2023-06-19 13:28:53 +0200
+Version 1.6.0<br>
+Last updated 2025-07-28 15:11:59 +0200
 </div>
 </div>
 <script type="text/javascript">
